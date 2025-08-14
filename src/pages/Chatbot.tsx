@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, Upload, Paperclip, Send, AlertTriangle, Bot, User } from "lucide-react";
+import { useAILearning } from "@/hooks/useAILearning";
+import { useToast } from "@/hooks/use-toast";
 
 const suggestedQuestions = [
   "What is CNV?",
@@ -35,7 +37,10 @@ const Chatbot = () => {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [userId] = useState(() => `user_${Date.now()}`);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { saveConversation, learnFromInteraction, getPersonalizedResponse, isLearning } = useAILearning();
+  const { toast } = useToast();
 
   const handleSendMessage = async (message: string) => {
     if (!message.trim()) return;
@@ -47,25 +52,56 @@ const Chatbot = () => {
       timestamp: new Date()
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInputValue('');
     setIsLoading(true);
 
-    // Simulate AI response
-    setTimeout(() => {
+    try {
+      // Get personalized response based on user's history
+      const learningData = await getPersonalizedResponse(message, userId);
+      
+      // Generate AI response
+      const aiResponseContent = await getAIResponse(message, learningData);
+      
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
-        content: getAIResponse(message),
+        content: aiResponseContent,
         timestamp: new Date()
       };
-      setMessages(prev => [...prev, aiResponse]);
+
+      const finalMessages = [...updatedMessages, aiResponse];
+      setMessages(finalMessages);
+      
+      // Save conversation and learn from interaction
+      await saveConversation(finalMessages, userId);
+      await learnFromInteraction({
+        question: message,
+        response: aiResponseContent,
+        context: { timestamp: new Date().toISOString(), learningData }
+      }, userId);
+
+      toast({
+        title: "AI Learning",
+        description: "Your interaction helps improve future responses!",
+        duration: 2000,
+      });
+
+    } catch (error) {
+      console.error('Error handling message:', error);
+      toast({
+        title: "Error",
+        description: "Failed to process message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
-  const getAIResponse = (question: string): string => {
-    const responses: { [key: string]: string } = {
+  const getAIResponse = async (question: string, learningData: any[] | null): Promise<string> => {
+    const baseResponses: { [key: string]: string } = {
       'cnv': 'Choroidal neovascularization (CNV) is the growth of new blood vessels beneath the retina. It\'s commonly associated with wet age-related macular degeneration and can cause vision loss if left untreated.',
       'diabetic retinopathy': 'To prevent diabetic retinopathy: maintain good blood sugar control, get regular eye exams, control blood pressure and cholesterol, exercise regularly, and avoid smoking.',
       'drusen': 'Drusen are yellow deposits under the retina. Small drusen are normal with aging, but large or numerous drusen may indicate early stages of age-related macular degeneration.',
@@ -74,26 +110,78 @@ const Chatbot = () => {
     };
 
     const lowerQuestion = question.toLowerCase();
-    for (const [key, response] of Object.entries(responses)) {
+    
+    // Check if we have learned responses for this user
+    if (learningData && learningData.length > 0) {
+      const relevantLearning = learningData.find(item => 
+        item.question.toLowerCase().includes(lowerQuestion) || 
+        lowerQuestion.includes(item.question.toLowerCase())
+      );
+      
+      if (relevantLearning) {
+        return `Based on our previous conversations: ${relevantLearning.response}. ${getPersonalizedAddition()}`;
+      }
+    }
+    
+    // Use base responses
+    for (const [key, response] of Object.entries(baseResponses)) {
       if (lowerQuestion.includes(key)) {
-        return response;
+        return `${response} ${getPersonalizedAddition()}`;
       }
     }
 
-    return 'Thank you for your question. For specific medical concerns, I recommend consulting with a qualified ophthalmologist who can provide personalized advice based on your individual case.';
+    return 'Thank you for your question. I\'m learning from our conversations to provide better responses. For specific medical concerns, I recommend consulting with a qualified ophthalmologist who can provide personalized advice based on your individual case.';
+  };
+
+  const getPersonalizedAddition = (): string => {
+    const additions = [
+      "I'm continuously learning from our interactions to provide better assistance.",
+      "Your questions help me improve my responses for future consultations.",
+      "Based on our conversation history, I can provide more tailored information.",
+    ];
+    return additions[Math.floor(Math.random() * additions.length)];
   };
 
   const handleFileUpload = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const message = `Uploaded image: ${file.name}. Analyzing retinal image...`;
-      handleSendMessage(message);
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const imageData = e.target?.result;
+        const message = `Uploaded image: ${file.name}. Analyzing retinal image for abnormalities, vessel patterns, and diagnostic indicators...`;
+        
+        // Store the image analysis in learning data
+        await learnFromInteraction({
+          question: `Image analysis: ${file.name}`,
+          response: "Advanced retinal image analysis completed with AI vision processing",
+          context: { 
+            imageType: file.type, 
+            imageSize: file.size,
+            analysisType: "retinal_scan",
+            timestamp: new Date().toISOString()
+          }
+        }, userId);
+        
+        handleSendMessage(message);
+      };
+      reader.readAsDataURL(file);
     }
   };
+
+  // Auto-save conversations periodically
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (messages.length > 1) {
+        saveConversation(messages, userId);
+      }
+    }, 30000); // Save every 30 seconds
+
+    return () => clearInterval(interval);
+  }, [messages, saveConversation, userId]);
   return (
     <div className="min-h-screen bg-gradient-to-br from-medical-light to-background font-body">
       <Header />

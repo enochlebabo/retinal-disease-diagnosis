@@ -22,6 +22,18 @@ export default {
 				serif: ['Playfair Display', 'Crimson Text', 'serif'],
 				body: ['Crimson Text', 'serif'],
 			},
+			fontSize: {
+				'xs': ['0.6875rem', { lineHeight: '1rem' }],      // 11px, reduced from 12px
+				'sm': ['0.8125rem', { lineHeight: '1.25rem' }],   // 13px, reduced from 14px  
+				'base': ['0.875rem', { lineHeight: '1.375rem' }], // 14px, reduced from 16px
+				'lg': ['1rem', { lineHeight: '1.5rem' }],         // 16px, reduced from 18px
+				'xl': ['1.125rem', { lineHeight: '1.75rem' }],    // 18px, reduced from 20px
+				'2xl': ['1.375rem', { lineHeight: '2rem' }],      // 22px, reduced from 24px
+				'3xl': ['1.75rem', { lineHeight: '2.25rem' }],    // 28px, reduced from 30px
+				'4xl': ['2rem', { lineHeight: '2.5rem' }],        // 32px, reduced from 36px
+				'5xl': ['2.5rem', { lineHeight: '3rem' }],        // 40px, reduced from 48px
+				'6xl': ['3rem', { lineHeight: '3.5rem' }],        // 48px, reduced from 60px
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
