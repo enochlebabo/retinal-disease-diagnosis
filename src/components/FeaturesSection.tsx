@@ -42,11 +42,11 @@ const features = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="py-20 px-4">
+    <section className="py-20 px-4 bg-white">
       <div className="container mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">Advanced Medical AI Diagnostic Features</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-slate-900">Advanced Medical AI Diagnostic Features</h2>
+          <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
             Our cutting-edge technology combines GPT-4.1 Vision with specialized medical AI to deliver professional-grade retinal analysis with unparalleled accuracy.
           </p>
         </div>
@@ -55,13 +55,13 @@ export const FeaturesSection = () => {
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-slate-100 bg-white">
                 <CardContent className="p-8 text-center">
                   <div className={`${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <IconComponent className="h-8 w-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl font-semibold mb-4 text-slate-900">{feature.title}</h3>
+                  <p className="text-slate-600 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             );
