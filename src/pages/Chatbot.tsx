@@ -10,6 +10,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, Upload, Paperclip, Send, AlertTriangle, Bot, User } from "lucide-react";
 import { useAILearning } from "@/hooks/useAILearning";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
+import { AuthGuard } from "@/components/AuthGuard";
 
 const suggestedQuestions = [
   "What is CNV?",
@@ -27,17 +29,17 @@ interface Message {
 }
 
 const Chatbot = () => {
+  const { user } = useAuth()
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       type: 'ai',
-      content: 'Hello! I\'m your AI Vision Assistant. Upload a retinal image for professional analysis or ask me about eye health.',
+      content: `Hello! I'm your AI Vision Assistant. Upload a retinal image for professional analysis or ask me about eye health.`,
       timestamp: new Date()
     }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [userId] = useState(() => `user_${Date.now()}`);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { saveConversation, learnFromInteraction, getPersonalizedResponse, isLearning } = useAILearning();
   const { toast } = useToast();
@@ -59,7 +61,7 @@ const Chatbot = () => {
 
     try {
       // Get personalized response based on user's history
-      const learningData = await getPersonalizedResponse(message, userId);
+      const learningData = await getPersonalizedResponse(message, user?.id || 'anonymous');
       
       // Generate AI response
       const aiResponseContent = await getAIResponse(message, learningData);
@@ -75,12 +77,12 @@ const Chatbot = () => {
       setMessages(finalMessages);
       
       // Save conversation and learn from interaction
-      await saveConversation(finalMessages, userId);
+      await saveConversation(finalMessages, user?.id || 'anonymous');
       await learnFromInteraction({
         question: message,
         response: aiResponseContent,
-        context: { timestamp: new Date().toISOString(), learningData }
-      }, userId);
+        context: { timestamp: new Date().toISOString(), learningData, userId: user?.id }
+      }, user?.id || 'anonymous');
 
       toast({
         title: "AI Learning",
@@ -162,9 +164,10 @@ const Chatbot = () => {
             imageType: file.type, 
             imageSize: file.size,
             analysisType: "retinal_scan",
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            userId: user?.id
           }
-        }, userId);
+        }, user?.id || 'anonymous');
         
         handleSendMessage(message);
       };
@@ -176,14 +179,15 @@ const Chatbot = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (messages.length > 1) {
-        saveConversation(messages, userId);
+        saveConversation(messages, user?.id || 'anonymous');
       }
     }, 30000); // Save every 30 seconds
 
     return () => clearInterval(interval);
-  }, [messages, saveConversation, userId]);
+  }, [messages, saveConversation, user?.id]);
   return (
-    <div className="min-h-screen bg-gradient-to-br from-medical-light to-background font-body">
+    <AuthGuard>
+      <div className="min-h-screen bg-gradient-to-br from-medical-light to-background font-body">
       <Header />
       
       <main className="py-16 px-4">
@@ -323,8 +327,9 @@ const Chatbot = () => {
         </div>
       </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </AuthGuard>
   );
 };
 

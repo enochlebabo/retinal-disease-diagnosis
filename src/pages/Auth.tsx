@@ -1,14 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 const Auth = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [activeTab, setActiveTab] = useState("login")
+  
+  const { signIn, signUp, user } = useAuth()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (user) {
+      navigate("/")
+    }
+  }, [user, navigate])
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    await signIn(email, password)
+    setIsLoading(false)
+  }
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (password !== confirmPassword) {
+      alert("Passwords don't match")
+      return
+    }
+    
+    setIsLoading(true)
+    await signUp(email, password, {
+      display_name: `${firstName} ${lastName}`.trim()
+    })
+    setIsLoading(false)
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-medical-light to-background flex items-center justify-center p-4">
@@ -35,7 +73,7 @@ const Auth = () => {
 
               {/* Login Tab */}
               <TabsContent value="login" className="space-y-4">
-                <div className="space-y-4">
+                <form onSubmit={handleLogin} className="space-y-4">
                   <h2 className="text-xl font-semibold text-foreground">Welcome Back</h2>
                   <p className="text-sm text-muted-foreground">
                     Enter your credentials to access your account
@@ -49,7 +87,9 @@ const Auth = () => {
                         type="email"
                         placeholder="doctor@example.com"
                         className="mt-2 bg-background border-border"
-                        defaultValue="doctor@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </div>
                     
@@ -59,13 +99,10 @@ const Auth = () => {
                         id="login-password"
                         type="password"
                         className="mt-2 bg-background border-border"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
                       />
-                    </div>
-                    
-                    <div className="text-right">
-                      <Link to="/forgot-password" className="text-sm text-primary hover:underline">
-                        Forgot password?
-                      </Link>
                     </div>
                     
                     <Button 
@@ -77,12 +114,12 @@ const Auth = () => {
                       {isLoading ? "Signing in..." : "Sign In"}
                     </Button>
                   </div>
-                </div>
+                </form>
               </TabsContent>
 
               {/* Sign Up Tab */}
               <TabsContent value="signup" className="space-y-4">
-                <div className="space-y-4">
+                <form onSubmit={handleSignUp} className="space-y-4">
                   <h2 className="text-xl font-semibold text-foreground">Create Account</h2>
                   <p className="text-sm text-muted-foreground">
                     Join Retinal-AI to access advanced diagnostic tools
@@ -96,6 +133,9 @@ const Auth = () => {
                           id="first-name"
                           placeholder="Dr. John"
                           className="mt-2 bg-background border-border"
+                          value={firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          required
                         />
                       </div>
                       <div>
@@ -104,6 +144,9 @@ const Auth = () => {
                           id="last-name"
                           placeholder="Doe"
                           className="mt-2 bg-background border-border"
+                          value={lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          required
                         />
                       </div>
                     </div>
@@ -115,6 +158,9 @@ const Auth = () => {
                         type="email"
                         placeholder="doctor@hospital.com"
                         className="mt-2 bg-background border-border"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </div>
                     
@@ -124,6 +170,10 @@ const Auth = () => {
                         id="signup-password"
                         type="password"
                         className="mt-2 bg-background border-border"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        minLength={6}
                       />
                     </div>
                     
@@ -133,6 +183,9 @@ const Auth = () => {
                         id="confirm-password"
                         type="password"
                         className="mt-2 bg-background border-border"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
                       />
                     </div>
                     
@@ -145,7 +198,7 @@ const Auth = () => {
                       {isLoading ? "Creating account..." : "Create Account"}
                     </Button>
                   </div>
-                </div>
+                </form>
               </TabsContent>
             </Tabs>
           </CardContent>

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Eye, Upload, MessageSquare, CheckCircle, Users, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
@@ -75,12 +76,16 @@ export const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <Button size="lg" className="bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 text-base">
-                Start Analysis
-              </Button>
-              <Button size="lg" variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-3 text-base">
-                Learn More
-              </Button>
+              <Link to="/dashboard">
+                <Button size="lg" className="bg-slate-800 hover:bg-slate-900 text-white px-8 py-3 text-base">
+                  Get Started
+                </Button>
+              </Link>
+              <Link to="/features">
+                <Button size="lg" variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-3 text-base">
+                  Learn More
+                </Button>
+              </Link>
             </div>
             
             <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-8 pt-4">
