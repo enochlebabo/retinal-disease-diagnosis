@@ -16,29 +16,29 @@ export const Header = () => {
         </div>
         
         <nav className="hidden md:flex items-center space-x-6">
-          <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/about" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             About
           </a>
-          <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Features
           </a>
-          <a href="#education" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/education" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Education
           </a>
-          <a href="#contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Contact
           </a>
-          <a href="#ai-assistant" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+          <a href="/chatbot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             AI Assistant
           </a>
         </nav>
         
         <div className="flex items-center space-x-3">
-          <Button variant="ghost" className="text-sm">
-            Login
+          <Button variant="ghost" className="text-sm" asChild>
+            <a href="/auth">Login</a>
           </Button>
-          <Button className="text-sm">
-            Sign Up
+          <Button className="text-sm" asChild>
+            <a href="/auth">Sign Up</a>
           </Button>
         </div>
       </div>
