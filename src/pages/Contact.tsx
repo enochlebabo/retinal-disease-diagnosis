@@ -32,7 +32,7 @@ const Contact = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Phone className="h-6 w-6 text-primary-foreground" />
+                        <Icon icon="mdi:phone" className="h-6 w-6 text-primary-foreground" />
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold mb-1 text-foreground">Phone Support</h3>
@@ -47,7 +47,7 @@ const Contact = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-medical rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Mail className="h-6 w-6 text-white" />
+                        <Icon icon="mdi:email" className="h-6 w-6 text-white" />
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold mb-1 text-foreground">Email Support</h3>
@@ -62,7 +62,7 @@ const Contact = () => {
                   <CardContent className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <MapPin className="h-6 w-6 text-white" />
+                        <Icon icon="mdi:map-marker" className="h-6 w-6 text-white" />
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold mb-1 text-foreground">Office Address</h3>
@@ -127,7 +127,7 @@ const Contact = () => {
                     </div>
                     
                     <Button type="submit" className="w-full" size="lg">
-                      <Send className="h-4 w-4 mr-2" />
+                      <Icon icon="mdi:send" className="h-4 w-4 mr-2" />
                       Send Message
                     </Button>
                   </form>

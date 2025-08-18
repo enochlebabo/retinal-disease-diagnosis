@@ -101,7 +101,7 @@ const Dashboard = () => {
                       <p className="text-sm text-muted-foreground">Total Patients</p>
                       <p className="text-2xl font-bold">{stats.totalPatients}</p>
                     </div>
-                    <Users className="h-8 w-8 text-primary" />
+                    <Icon icon="mdi:account-group" className="h-8 w-8 text-primary" />
                   </div>
                 </CardContent>
               </Card>
@@ -113,7 +113,7 @@ const Dashboard = () => {
                       <p className="text-sm text-muted-foreground">Analyses</p>
                       <p className="text-2xl font-bold">{stats.recentAnalyses}</p>
                     </div>
-                    <Eye className="h-8 w-8 text-primary" />
+                    <Icon icon="mdi:eye" className="h-8 w-8 text-medical" />
                   </div>
                 </CardContent>
               </Card>
@@ -125,7 +125,7 @@ const Dashboard = () => {
                       <p className="text-sm text-muted-foreground">AI Learning</p>
                       <p className="text-2xl font-bold">{stats.learningEntries}</p>
                     </div>
-                    <Activity className="h-8 w-8 text-primary" />
+                    <Icon icon="mdi:chart-line" className="h-8 w-8 text-blue-500" />
                   </div>
                 </CardContent>
               </Card>
@@ -137,7 +137,7 @@ const Dashboard = () => {
                       <p className="text-sm text-muted-foreground">Reports</p>
                       <p className="text-2xl font-bold">{stats.recentAnalyses}</p>
                     </div>
-                    <FileText className="h-8 w-8 text-primary" />
+                    <Icon icon="mdi:file-document" className="h-8 w-8 text-amber-500" />
                   </div>
                 </CardContent>
               </Card>
@@ -148,7 +148,7 @@ const Dashboard = () => {
               <Link to="/chatbot">
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardContent className="p-6 text-center">
-                    <Eye className="h-12 w-12 text-primary mx-auto mb-4" />
+                    <Icon icon="mdi:eye" className="h-12 w-12 text-primary mx-auto mb-4" />
                     <h3 className="font-semibold mb-2">AI Analysis</h3>
                     <p className="text-sm text-muted-foreground">
                       Upload retinal images for AI-powered analysis
@@ -160,7 +160,7 @@ const Dashboard = () => {
               <Link to="/doctor">
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardContent className="p-6 text-center">
-                    <Users className="h-12 w-12 text-primary mx-auto mb-4" />
+                    <Icon icon="mdi:account-group" className="h-12 w-12 text-primary mx-auto mb-4" />
                     <h3 className="font-semibold mb-2">Patient Management</h3>
                     <p className="text-sm text-muted-foreground">
                       Manage patient records and medical history
@@ -171,7 +171,7 @@ const Dashboard = () => {
 
               <Card className="hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">
-                  <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <Icon icon="mdi:file-document" className="h-12 w-12 text-primary mx-auto mb-4" />
                   <h3 className="font-semibold mb-2">Generate Report</h3>
                   <p className="text-sm text-muted-foreground">
                     Create detailed medical reports
@@ -188,7 +188,7 @@ const Dashboard = () => {
                   <CardTitle className="flex items-center justify-between">
                     Recent Patients
                     <Button size="sm" variant="outline">
-                      <Plus className="h-4 w-4 mr-2" />
+                      <Icon icon="mdi:plus" className="h-4 w-4 mr-2" />
                       Add Patient
                     </Button>
                   </CardTitle>

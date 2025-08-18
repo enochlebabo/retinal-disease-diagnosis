@@ -85,7 +85,7 @@ const Education = () => {
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <BookOpen className="h-5 w-5 text-primary-foreground" />
+                <Icon icon="mdi:book-open" className="h-5 w-5 text-primary-foreground" />
               </div>
               <h2 className="text-3xl font-bold text-foreground">Understanding Retinal Diseases</h2>
             </div>
@@ -147,7 +147,7 @@ const Education = () => {
               <Card className="border-border bg-card hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <FileText className="h-8 w-8 text-primary-foreground" />
+                    <Icon icon="mdi:file-document" className="h-8 w-8 text-primary-foreground" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">Retinal Health Guide</h3>
                   <p className="text-muted-foreground mb-4">Comprehensive guide covering all aspects of retinal health and disease prevention.</p>
