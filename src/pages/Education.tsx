@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Eye, Heart, Shield, Sun, FileText, Video, BookOpen } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 const diseases = [
   {

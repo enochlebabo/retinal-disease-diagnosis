@@ -1,21 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Shield, Award } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 const validations = [
   {
-    icon: CheckCircle,
+    icon: "mdi:check-circle",
     title: "Peer Reviewed",
     description: "Published in leading ophthalmology journals with clinical validation",
     color: "bg-medical",
   },
   {
-    icon: Shield,
+    icon: "mdi:shield-check",
     title: "FDA Compliant",
     description: "Meets FDA guidelines for AI/ML-based medical device software",
     color: "bg-primary",
   },
   {
-    icon: Award,
+    icon: "mdi:trophy",
     title: "Award Winning",
     description: "Recognition from international medical AI and innovation awards",
     color: "bg-warning",
@@ -32,12 +32,11 @@ export const ValidationSection = () => {
         
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {validations.map((validation, index) => {
-            const IconComponent = validation.icon;
             return (
               <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 border-slate-100 group hover:-translate-y-2">
                 <CardContent className="p-8">
                   <div className={`${validation.color} w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="h-10 w-10 text-white" />
+                    <Icon icon={validation.icon} className="h-10 w-10 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-4 text-slate-900">{validation.title}</h3>
                   <p className="text-slate-600">{validation.description}</p>

@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Brain, Eye, Shield, Users } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 const About = () => {
   return (
@@ -80,7 +80,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                      <Brain className="h-5 w-5 text-primary-foreground" />
+                      <Icon icon="mdi:brain" className="h-5 w-5 text-primary-foreground" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">Accuracy</h3>
                   </div>
@@ -94,7 +94,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-medical rounded-lg flex items-center justify-center">
-                      <Eye className="h-5 w-5 text-white" />
+                      <Icon icon="mdi:eye" className="h-5 w-5 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">Accessibility</h3>
                   </div>
@@ -108,7 +108,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center">
-                      <Shield className="h-5 w-5 text-white" />
+                      <Icon icon="mdi:shield-check" className="h-5 w-5 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">Privacy</h3>
                   </div>
@@ -122,7 +122,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                      <Users className="h-5 w-5 text-white" />
+                      <Icon icon="mdi:account-group" className="h-5 w-5 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">Innovation</h3>
                   </div>

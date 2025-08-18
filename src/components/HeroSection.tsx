@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Eye, Upload, MessageSquare, CheckCircle, Users, Award } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
@@ -14,7 +14,7 @@ export const HeroSection = () => {
             <Card className="p-6 bg-card/95 backdrop-blur border-blue-100 shadow-lg">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                  <Eye className="h-6 w-6 text-primary-foreground" />
+                  <Icon icon="mdi:eye" className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">AI Vision Assistant</h3>
@@ -42,12 +42,12 @@ export const HeroSection = () => {
               
               <div className="flex space-x-2 mb-4">
                 <div className="flex-1 flex items-center space-x-2 border border-blue-200 rounded-lg px-3 py-2 bg-white">
-                  <Upload className="h-4 w-4 text-blue-500" />
-                  <MessageSquare className="h-4 w-4 text-blue-500" />
+                  <Icon icon="mdi:upload" className="h-4 w-4 text-blue-500" />
+                  <Icon icon="mdi:message-text" className="h-4 w-4 text-blue-500" />
                   <span className="text-sm text-muted-foreground flex-1">Ask about retinal health conditions...</span>
                 </div>
                 <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                  <MessageSquare className="h-4 w-4" />
+                  <Icon icon="mdi:message-text" className="h-4 w-4" />
                 </Button>
               </div>
               
@@ -90,15 +90,15 @@ export const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-8 pt-4">
               <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-medical" />
+                <Icon icon="mdi:check-circle" className="h-5 w-5 text-medical" />
                 <span className="text-sm text-slate-600">HIPAA Compliant</span>
               </div>
               <div className="flex items-center space-x-2">
-                <CheckCircle className="h-5 w-5 text-blue-600" />
+                <Icon icon="mdi:check-circle" className="h-5 w-5 text-blue-600" />
                 <span className="text-sm text-slate-600">FDA Guidelines</span>
               </div>
               <div className="flex items-center space-x-2">
-                <Users className="h-5 w-5 text-amber-600" />
+                <Icon icon="mdi:account-group" className="h-5 w-5 text-amber-600" />
                 <span className="text-sm text-slate-600">500+ Clinics</span>
               </div>
             </div>

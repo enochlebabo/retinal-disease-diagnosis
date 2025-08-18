@@ -1,4 +1,4 @@
-import { Eye, Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Badge } from "@/components/ui/badge";
 
 export const Footer = () => {
@@ -10,7 +10,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Eye className="h-5 w-5 text-primary-foreground" />
+                <Icon icon="mdi:eye" className="h-5 w-5 text-primary-foreground" />
               </div>
               <div>
                 <span className="text-xl font-bold text-white">Retinal-AI</span>
@@ -21,10 +21,10 @@ export const Footer = () => {
               Empowering healthcare professionals and patients with AI-powered retinal analysis and comprehensive eye care management solutions.
             </p>
             <div className="flex space-x-3">
-              <Twitter className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
-              <Linkedin className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
-              <Github className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
-              <Mail className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
+              <Icon icon="mdi:twitter" className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
+              <Icon icon="mdi:linkedin" className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
+              <Icon icon="mdi:github" className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
+              <Icon icon="mdi:email" className="h-5 w-5 hover:text-primary cursor-pointer transition-colors" />
             </div>
           </div>
           

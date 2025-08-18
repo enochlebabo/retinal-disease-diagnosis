@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { AuthGuard } from "@/components/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/lib/supabase";
-import { Eye, Users, FileText, Activity, Plus } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
 interface DashboardStats {

@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
-import { Camera, Brain, Upload, BarChart3, Shield, Users } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 const features = [
   {

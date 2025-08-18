@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Eye, ArrowLeft } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -55,7 +55,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-              <Eye className="h-6 w-6 text-primary-foreground" />
+              <Icon icon="mdi:eye" className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="text-2xl font-bold text-foreground">Retinal-AI</span>
           </div>
@@ -210,7 +210,7 @@ const Auth = () => {
             to="/" 
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <Icon icon="mdi:arrow-left" className="h-4 w-4" />
             Back to Home
           </Link>
         </div>

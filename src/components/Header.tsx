@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Eye, Menu, X, User } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -13,7 +13,7 @@ export const Header = () => {
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center space-x-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <Eye className="h-5 w-5 text-primary-foreground" />
+            <Icon icon="mdi:eye" className="h-5 w-5 text-primary-foreground" />
           </div>
           <div>
             <span className="text-xl font-bold text-foreground">Retinal-AI</span>
@@ -52,7 +52,7 @@ export const Header = () => {
           {user ? (
             <>
               <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
-                <User className="h-4 w-4" />
+                <Icon icon="mdi:account" className="h-4 w-4" />
                 <span>{user.email}</span>
               </div>
               <Button 
@@ -87,7 +87,7 @@ export const Header = () => {
           className="md:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {isMenuOpen ? <Icon icon="mdi:close" className="h-5 w-5" /> : <Icon icon="mdi:menu" className="h-5 w-5" />}
         </Button>
       </div>
 

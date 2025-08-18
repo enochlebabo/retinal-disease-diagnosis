@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Eye, Upload, Paperclip, Send, AlertTriangle, Bot, User } from "lucide-react";
+import { Icon } from "@iconify/react";
 import { useAILearning } from "@/hooks/useAILearning";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
@@ -205,7 +205,7 @@ const Chatbot = () => {
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-                  <Eye className="h-5 w-5 text-primary-foreground" />
+                  <Icon icon="mdi:eye" className="h-5 w-5 text-primary-foreground" />
                 </div>
                 <div>
                   <h2 className="text-lg font-serif font-bold text-foreground">AI Vision Assistant</h2>
@@ -228,7 +228,7 @@ const Chatbot = () => {
                       <div key={message.id} className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : ''}`}>
                         {message.type === 'ai' && (
                           <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                            <Bot className="h-4 w-4 text-primary-foreground" />
+                            <Icon icon="mdi:robot" className="h-4 w-4 text-primary-foreground" />
                           </div>
                         )}
                         <div className={`rounded-lg p-3 max-w-[80%] ${
@@ -240,7 +240,7 @@ const Chatbot = () => {
                         </div>
                         {message.type === 'user' && (
                           <div className="w-7 h-7 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                            <User className="h-4 w-4 text-secondary-foreground" />
+                            <Icon icon="mdi:account" className="h-4 w-4 text-secondary-foreground" />
                           </div>
                         )}
                       </div>
@@ -248,7 +248,7 @@ const Chatbot = () => {
                     {isLoading && (
                       <div className="flex gap-3">
                         <div className="w-7 h-7 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-                          <Bot className="h-4 w-4 text-primary-foreground" />
+                          <Icon icon="mdi:robot" className="h-4 w-4 text-primary-foreground" />
                         </div>
                         <div className="bg-muted rounded-lg p-3">
                           <div className="flex space-x-1">
@@ -293,10 +293,10 @@ const Chatbot = () => {
                   className="hidden"
                 />
                 <Button variant="outline" size="icon" className="flex-shrink-0" onClick={handleFileUpload}>
-                  <Upload className="h-4 w-4" />
+                  <Icon icon="mdi:upload" className="h-4 w-4" />
                 </Button>
                 <Button variant="outline" size="icon" className="flex-shrink-0">
-                  <Paperclip className="h-4 w-4" />
+                  <Icon icon="mdi:paperclip" className="h-4 w-4" />
                 </Button>
                 <Input 
                   placeholder="Ask about retinal health conditions..." 
@@ -311,7 +311,7 @@ const Chatbot = () => {
                   onClick={() => handleSendMessage(inputValue)}
                   disabled={!inputValue.trim() || isLoading}
                 >
-                  <Send className="h-4 w-4" />
+                  <Icon icon="mdi:send" className="h-4 w-4" />
                 </Button>
               </div>
             </CardContent>
@@ -319,7 +319,7 @@ const Chatbot = () => {
 
           {/* Medical Disclaimer */}
           <Alert className="border-warning/20 bg-warning/10">
-            <AlertTriangle className="h-4 w-4 text-warning" />
+            <Icon icon="mdi:alert-triangle" className="h-4 w-4 text-warning" />
             <AlertDescription className="text-warning-foreground text-sm">
               <strong>Medical Disclaimer:</strong> This AI tool provides educational analysis only and is not a substitute for professional medical diagnosis. Always consult with a qualified ophthalmologist for medical advice and treatment decisions.
             </AlertDescription>
