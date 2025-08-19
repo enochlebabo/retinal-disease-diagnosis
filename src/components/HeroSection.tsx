@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import { AIAssistant } from "@/components/AIAssistant";
 
 export const HeroSection = () => {
   return (
@@ -11,52 +11,7 @@ export const HeroSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - AI Assistant Chat */}
           <div className="space-y-6 order-2 lg:order-1">
-            <Card className="p-6 bg-card/95 backdrop-blur border-blue-100 shadow-lg">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                  <Icon icon="mdi:eye" className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground">AI Vision Assistant</h3>
-                  <p className="text-sm text-muted-foreground">Medical-Grade Analysis • GPT-4.1 Vision</p>
-                </div>
-              </div>
-              
-              <p className="text-sm text-muted-foreground mb-4">
-                Upload retinal images for professional AI analysis or ask questions about eye health conditions
-              </p>
-              
-              <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-100">
-                <p className="text-sm text-blue-900">
-                  Hello! I'm your AI Vision Assistant. Upload a retinal image for professional analysis or ask me about eye health.
-                </p>
-              </div>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50">What is CNV?</Badge>
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50">How to prevent diabetic retinopathy?</Badge>
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50">What does Drusen indicate?</Badge>
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50">Signs of glaucoma?</Badge>
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50">Normal retinal appearance</Badge>
-              </div>
-              
-              <div className="flex space-x-2 mb-4">
-                <div className="flex-1 flex items-center space-x-2 border border-blue-200 rounded-lg px-3 py-2 bg-white">
-                  <Icon icon="mdi:upload" className="h-4 w-4 text-blue-500" />
-                  <Icon icon="mdi:message-text" className="h-4 w-4 text-blue-500" />
-                  <span className="text-sm text-muted-foreground flex-1">Ask about retinal health conditions...</span>
-                </div>
-                <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                  <Icon icon="mdi:message-text" className="h-4 w-4" />
-                </Button>
-              </div>
-              
-              <div className="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-xs text-amber-800">
-                  <strong>Medical Disclaimer:</strong> This AI tool provides educational analysis only and is not a substitute for professional medical diagnosis. Always consult with a qualified ophthalmologist for medical advice and treatment decisions.
-                </p>
-              </div>
-            </Card>
+            <AIAssistant />
           </div>
           
           {/* Right side - Main content */}

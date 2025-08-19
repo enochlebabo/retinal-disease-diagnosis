@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
+import { useRole } from "@/hooks/useRole";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { user, signOut } = useAuth()
+  const { role, isAdmin, isClinician } = useRole()
 
   return (
     <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,6 +45,16 @@ export const Header = () => {
               <Link to="/chatbot" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 AI Assistant
               </Link>
+              {isClinician() && (
+                <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Clinical Portal
+                </Link>
+              )}
+              {isAdmin() && (
+                <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                  Admin Panel
+                </Link>
+              )}
             </>
           )}
         </nav>
@@ -54,6 +66,15 @@ export const Header = () => {
               <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
                 <Icon icon="mdi:account" className="h-4 w-4" />
                 <span>{user.email}</span>
+                {role && (
+                  <span className={`ml-2 px-2 py-1 text-xs rounded-full ${
+                    role === 'admin' ? 'bg-red-100 text-red-800' :
+                    role === 'clinician' ? 'bg-blue-100 text-blue-800' :
+                    'bg-green-100 text-green-800'
+                  }`}>
+                    {role}
+                  </span>
+                )}
               </div>
               <Button 
                 variant="outline" 
@@ -115,6 +136,16 @@ export const Header = () => {
                 <Link to="/chatbot" className="block py-2 text-sm text-muted-foreground hover:text-foreground">
                   AI Assistant
                 </Link>
+                {isClinician() && (
+                  <Link to="/admin" className="block py-2 text-sm text-muted-foreground hover:text-foreground">
+                    Clinical Portal
+                  </Link>
+                )}
+                {isAdmin() && (
+                  <Link to="/admin" className="block py-2 text-sm text-muted-foreground hover:text-foreground">
+                    Admin Panel
+                  </Link>
+                )}
               </>
             )}
           </nav>
