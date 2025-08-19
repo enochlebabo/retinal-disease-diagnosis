@@ -5,7 +5,7 @@ import { Icon } from "@iconify/react";
 
 const features = [
   {
-    icon: Camera,
+    icon: "mdi:camera",
     title: "Real-Time Camera Capture",
     description: "Instant retinal image capture with optimized camera controls for mobile devices",
     details: [
@@ -17,7 +17,7 @@ const features = [
     color: "bg-primary"
   },
   {
-    icon: Brain,
+    icon: "mdi:brain",
     title: "GPT-4.1 Vision Analysis", 
     description: "Advanced AI analysis for CNV, DME, Drusen, and normal retinal conditions",
     details: [
@@ -29,7 +29,7 @@ const features = [
     color: "bg-medical"
   },
   {
-    icon: Upload,
+    icon: "mdi:upload",
     title: "Easy Image Upload",
     description: "Drag-and-drop interface with preview and high-quality processing", 
     details: [
@@ -41,7 +41,7 @@ const features = [
     color: "bg-violet-500"
   },
   {
-    icon: BarChart3,
+    icon: "mdi:chart-bar",
     title: "Detailed Reports",
     description: "Comprehensive analysis reports with confidence scores and recommendations",
     details: [
@@ -53,7 +53,7 @@ const features = [
     color: "bg-warning"
   },
   {
-    icon: Shield,
+    icon: "mdi:shield-check",
     title: "Medical-Grade Security",
     description: "HIPAA-compliant data handling with appropriate medical disclaimers",
     details: [
@@ -65,7 +65,7 @@ const features = [
     color: "bg-red-500"
   },
   {
-    icon: Users,
+    icon: "mdi:account-group",
     title: "Patient Management", 
     description: "Comprehensive patient tracking and history management for healthcare providers",
     details: [
@@ -96,12 +96,11 @@ const Features = () => {
           {/* Features Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
-              const IconComponent = feature.icon;
               return (
                 <Card key={index} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-border bg-card">
                   <CardContent className="p-8">
                     <div className={`${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <IconComponent className="h-8 w-8 text-white" />
+                      <Icon icon={feature.icon} className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-xl font-semibold mb-4 text-foreground">{feature.title}</h3>
                     <p className="text-muted-foreground leading-relaxed mb-6">{feature.description}</p>

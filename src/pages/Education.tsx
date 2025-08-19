@@ -25,7 +25,7 @@ const diseases = [
 
 const preventionTips = [
   {
-    icon: Eye,
+    icon: "mdi:eye",
     title: "Regular Eye Exams",
     tips: [
       "Annual comprehensive eye exams",
@@ -35,7 +35,7 @@ const preventionTips = [
     ]
   },
   {
-    icon: Heart,
+    icon: "mdi:heart",
     title: "Diabetes Management",
     tips: [
       "Control blood sugar levels",
@@ -45,7 +45,7 @@ const preventionTips = [
     ]
   },
   {
-    icon: Shield,
+    icon: "mdi:shield-check",
     title: "Lifestyle Factors",
     tips: [
       "Quit smoking",
@@ -55,7 +55,7 @@ const preventionTips = [
     ]
   },
   {
-    icon: Sun,
+    icon: "mdi:white-balance-sunny",
     title: "UV Protection",
     tips: [
       "Wear UV-blocking sunglasses",
@@ -106,20 +106,19 @@ const Education = () => {
           <section className="mb-16">
             <div className="flex items-center gap-3 mb-8">
               <div className="w-8 h-8 bg-medical rounded-lg flex items-center justify-center">
-                <Shield className="h-5 w-5 text-white" />
+                <Icon icon="mdi:shield-check" className="h-5 w-5 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-foreground">Prevention and Care Tips</h2>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {preventionTips.map((category, index) => {
-                const IconComponent = category.icon;
                 return (
                   <Card key={index} className="border-border bg-card hover:shadow-lg transition-shadow">
                     <CardContent className="p-6">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                          <IconComponent className="h-5 w-5 text-primary-foreground" />
+                          <Icon icon={category.icon} className="h-5 w-5 text-primary-foreground" />
                         </div>
                         <h3 className="text-lg font-semibold text-foreground">{category.title}</h3>
                       </div>
@@ -158,7 +157,7 @@ const Education = () => {
               <Card className="border-border bg-card hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 bg-medical rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <Video className="h-8 w-8 text-white" />
+                    <Icon icon="mdi:video" className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">Educational Videos</h3>
                   <p className="text-muted-foreground mb-4">Watch expert explanations of retinal conditions and prevention strategies.</p>
@@ -169,7 +168,7 @@ const Education = () => {
               <Card className="border-border bg-card hover:shadow-lg transition-shadow cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="h-8 w-8 text-white" />
+                    <Icon icon="mdi:book-open" className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">Research Papers</h3>
                   <p className="text-muted-foreground mb-4">Access the latest scientific literature on retinal diseases and AI diagnostics.</p>
