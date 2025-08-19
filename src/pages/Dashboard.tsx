@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AuthGuard } from "@/components/AuthGuard";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/integrations/supabase/client";
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
@@ -48,9 +48,9 @@ const Dashboard = () => {
         .order('created_at', { ascending: false })
         .limit(5);
 
-      // Load user learning entries
-      const { count: learningCount } = await supabase
-        .from('user_learning')
+      // Load conversations count
+      const { count: conversationsCount } = await supabase
+        .from('conversations')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', user?.id);
 
@@ -64,8 +64,8 @@ const Dashboard = () => {
       setStats({
         totalPatients: patientsCount || 0,
         recentAnalyses: analysesCount || 0,
-        conversations: 0, // conversations table doesn't exist in current schema
-        learningEntries: learningCount || 0
+        conversations: conversationsCount || 0,
+        learningEntries: analysesCount || 0
       });
 
       setRecentPatients(patients || []);
@@ -77,7 +77,7 @@ const Dashboard = () => {
 
   return (
     <AuthGuard>
-      <div className="min-h-screen bg-gradient-to-br from-medical-light to-background">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
         <Header />
         
         <main className="py-16 px-4">

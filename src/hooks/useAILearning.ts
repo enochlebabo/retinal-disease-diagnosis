@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { supabase } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
 
 interface LearningData {
   question: string
@@ -30,12 +30,12 @@ export const useAILearning = () => {
     setIsLearning(true)
     try {
       const { error } = await supabase
-        .from('user_learning')
+        .from('ai_analyses')
         .insert({
           user_id: userId,
-          question: data.question,
-          response: data.response,
-          context: data.context
+          findings: data.question,
+          recommendations: data.response,
+          analysis_result: data.context
         })
       
       if (error) console.error('Error saving learning data:', error)
@@ -49,7 +49,7 @@ export const useAILearning = () => {
   const getPersonalizedResponse = useCallback(async (question: string, userId: string = 'anonymous') => {
     try {
       const { data, error } = await supabase
-        .from('user_learning')
+        .from('ai_analyses')
         .select('*')
         .eq('user_id', userId)
         .order('created_at', { ascending: false })
